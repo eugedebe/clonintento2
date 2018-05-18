@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".BlankFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:id="@+id/logo"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Películas Populares >"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/colorAccent3"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:id="@+id/menu1"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/logo"
+        />
+
+    <ImageView
+        android:id="@+id/peli1"
+        android:layout_width="150dp"
+        android:layout_height="218dp"
+        android:layout_below="@id/menu1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/caballero2"
+        android:layout_marginEnd="5dp"
+        />
+
+    <ImageView
+        android:id="@+id/peli2"
+        android:layout_width="150dp"
+        android:layout_height="218dp"
+        android:layout_alignBottom="@id/peli1"
+        android:layout_toEndOf="@id/peli1"
+        android:layout_toRightOf="@id/peli1"
+        android:src="@drawable/padrino" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/peli1"
+        android:text="Películas Recomendadas >"
+        android:id="@+id/menu2"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/colorAccent3"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"/>
+    <ImageView
+        android:id="@+id/peli3"
+        android:layout_width="150dp"
+        android:layout_height="218dp"
+        android:layout_below="@id/menu2"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/pulp"
+        android:layout_marginEnd="5dp" />
+
+    <ImageView
+        android:id="@+id/peli4"
+        android:layout_width="150dp"
+        android:layout_height="218dp"
+        android:layout_alignBottom="@id/peli3"
+        android:layout_toEndOf="@id/peli3"
+        android:layout_toRightOf="@id/peli3"
+        android:src="@drawable/caballero2" />
+
+
+</RelativeLayout>
