@@ -1,14 +1,13 @@
 package com.example.pff.myapplication;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements
-        BlankFragment.NotificadorAActivities {
+        Fragment1.NotificadorAActivities {
 
 
         @Override
@@ -18,27 +17,26 @@ public class MainActivity extends AppCompatActivity implements
 
         //CARGAR EL FRAGMENT 1
 
-        //CREO UNA INSTANCIA DEL FRAGMENT 1 (PASO 2.2)
-        BlankFragment blankFragment = new BlankFragment();
+        //CREO UNA INSTANCIA DEL FRAGMENT 1
+        Fragment1 fragment1 = new Fragment1();
 
-        //PIDO UN FRAGMENT MANAGER (PASO 2.3)
+        //PIDO UN FRAGMENT MANAGER
         FragmentManager manager = getSupportFragmentManager();
 
-        //PIDO UNA TRANSACCION AL FRAGMENT MANAGER (PASO 2.3)
+        //PIDO UNA TRANSACCION AL FRAGMENT MANAGER
         FragmentTransaction transaction = manager.beginTransaction();
 
-        //LE PIDO A LA TRANSACCION QUE AGREGUE EL FRAGMENT AL CONTENEDOR (PASO 2.4)
-        transaction.add(R.id.contenedorFragment, blankFragment);
+        //LE PIDO A LA TRANSACCION QUE AGREGUE EL FRAGMENT AL CONTENEDOR
+        transaction.add(R.id.contenedorFragment, fragment1);
 
-        //CONFIRMO LA TRANSACCIÓN (PASO 2.5)
+        //CONFIRMO LA TRANSACCIÓN
         transaction.commit();
     }
-    //PASO 3.3
+
     //  LA ACTIVITY TIENE QUE SOBREESCRIBIR ESTE METODO PORQUE IMPLEMENTA
     // LA INTERFAZ NOTIFICADORDEACTIVITY
     // ESTE METODO ES EL QUE VA A RECIBIR EL MENSAJE QUE LE ENVIE EL FRAGMENT.
     public void recibirMensaje(String titulo, String descripcion, int afiche){
-//    public void recibirMensaje(String mensaje){
 
             //IR A LA SECOND ACTIVITY Y ENVIARLE EL MENSAJE
         Intent unIntent = new Intent(this, WelcomeActivity.class);

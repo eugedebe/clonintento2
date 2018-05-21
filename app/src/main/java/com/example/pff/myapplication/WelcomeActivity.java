@@ -20,14 +20,14 @@ public class WelcomeActivity extends AppCompatActivity {
         Bundle unBundle = unIntent.getExtras();
 
         //CARGAR EL FRAGMENT 2
-        WelcomeFragment welcomeFragment = new WelcomeFragment();
+        Fragment2 fragment2 = new Fragment2();
 
 
         //LE ENVIO EL BUNDLE AL FRAGMENT
-        welcomeFragment.setArguments(unBundle);
+        fragment2.setArguments(unBundle);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.contenedorFragment2, welcomeFragment);
+        transaction.add(R.id.contenedorFragment2, fragment2);
         transaction.commit();
     }
 }

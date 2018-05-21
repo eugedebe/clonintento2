@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".BlankFragment">
+    tools:context=".Fragment1">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -27,6 +27,14 @@
         android:layout_marginLeft="16dp"
         android:layout_below="@id/logo"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="235dp"
+        android:background="@color/colorAccent3"
+        android:alpha="0.1"
+        android:layout_marginTop="6dp"
+        android:layout_below="@id/menu1"
+        />
 
     <ImageView
         android:id="@+id/peli1"
@@ -35,10 +43,10 @@
         android:layout_below="@id/menu1"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="6dp"
         android:src="@drawable/caballero2"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="6dp"
         />
 
     <ImageView
@@ -48,6 +56,8 @@
         android:layout_alignBottom="@id/peli1"
         android:layout_toEndOf="@id/peli1"
         android:layout_toRightOf="@id/peli1"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
         android:src="@drawable/padrino" />
 
     <TextView
@@ -61,7 +71,17 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="235dp"
+        android:background="@color/colorAccent3"
+        android:alpha="0.1"
+        android:layout_marginTop="6dp"
+        android:layout_below="@id/menu2"
+        />
+
     <ImageView
         android:id="@+id/peli3"
         android:layout_width="150dp"
@@ -69,10 +89,10 @@
         android:layout_below="@id/menu2"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="6dp"
         android:src="@drawable/pulp"
-        android:layout_marginEnd="5dp" />
+        android:layout_marginEnd="6dp" />
 
     <ImageView
         android:id="@+id/peli4"
@@ -81,6 +101,8 @@
         android:layout_alignBottom="@id/peli3"
         android:layout_toEndOf="@id/peli3"
         android:layout_toRightOf="@id/peli3"
+        android:layout_marginRight="6dp"
+        android:layout_marginEnd="6dp"
         android:src="@drawable/caballero2" />
 
 

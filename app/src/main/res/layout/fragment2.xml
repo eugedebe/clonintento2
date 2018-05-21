@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".WelcomeFragment">
+    tools:context=".Fragment2">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -28,9 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textSize="20sp"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:textColor="@color/colorAccent3"
-        android:id="@+id/textview_welcome2"
+        android:id="@+id/textview_welcome_titulo"
         android:layout_below="@id/afiche"
 
         />
@@ -40,13 +42,13 @@
         android:textSize="16sp"
         android:layout_marginLeft="20dp"
         android:textColor="@color/colorAccent3"
-        android:layout_below="@id/textview_welcome2"
-        android:id="@+id/textview_welcome"/>
+        android:layout_below="@id/textview_welcome_titulo"
+        android:id="@+id/textview_welcome_descripcion"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_welcome"
+        android:layout_below="@+id/textview_welcome_descripcion"
         android:layout_marginTop="20dp"
         android:textSize="16sp"
         android:text="Director: "
@@ -64,6 +66,15 @@
         android:layout_marginLeft="20dp"
         android:textColor="@color/colorAccent3"
         android:id="@+id/actores"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent3"
+        android:alpha="0.1"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/actores"
         />
 
     <TextView
