@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.example.recyclerviewbase.DetallePeliculaFragment">
+
+    <ImageView
+        android:id="@+id/imagen_pelicula"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        tools:src="@drawable/santa" />
+
+    <TextView
+        android:id="@+id/titulo_pelicula"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagen_pelicula"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/blanco"
+        tools:text="Titulo" />
+
+    <TextView
+        android:id="@+id/descripcion_pelicula"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titulo_pelicula"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@color/blanco"
+        tools:text="Bla bla bla bla" />
+
+</RelativeLayout>
