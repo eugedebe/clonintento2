@@ -68,6 +68,11 @@ public class PeliculaAdapter extends RecyclerView.Adapter {
         int indexPelicula = peliculas.indexOf(pelicula);
         notifyItemChanged(indexPelicula);
     }
+    public void actualizarRecycler() {
+
+        notifyDataSetChanged();
+    }
+
 
     public class ViewHolderPelicula extends RecyclerView.ViewHolder {
 
@@ -98,11 +103,12 @@ public class PeliculaAdapter extends RecyclerView.Adapter {
                     pelicula.cambiarEstadoFav();
 
                     // TODO: 27/5/2018 crear la función setearImagenFavorito que haga este trabajo para no repetir codigo
-                    if(pelicula.getEstaFavorito()){
+                   /* if(pelicula.getEstaFavorito()){
                         MainActivity.datosIniciales.agregaraFavoritos(pelicula);
                     }else{
                         MainActivity.datosIniciales.removerFavoritos(pelicula);
-                    }
+                    }*/
+                   configurarLogoFavorito(pelicula);
                     notificadorPeliculaCelda.solicitudDeActualizacionAdapters(pelicula);
                 }
             });
@@ -113,12 +119,21 @@ public class PeliculaAdapter extends RecyclerView.Adapter {
             //el pelicula que recibe deberia sacarle sus datos y pegarlos en la celda
 // TODO: 27/5/2018 cambiar este hardcodeo para que sea facil el cambio de la imagen de favoritos ya que no está definida 
             imagenPelicula.setImageResource(pelicula.getImageRes());
-            if(pelicula.getEstaFavorito()){
-                imagenestadoFavorito.setImageResource(R.drawable.ic_favorite_black_24dp);
-            }else{
-                imagenestadoFavorito.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-            }
+            configurarLogoFavorito(pelicula);
             
+        }
+
+        public void configurarLogoFavorito(Pelicula pelicula){
+            float alpha= 1.0f;
+            if(pelicula.getEstaFavorito()){
+                imagenestadoFavorito.setAlpha(alpha);
+
+            }else{
+                alpha=0.5f;
+                imagenestadoFavorito.setAlpha(alpha);
+
+
+            }
         }
 
     }

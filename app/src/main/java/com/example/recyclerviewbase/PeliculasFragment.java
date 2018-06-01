@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,16 +28,15 @@ import java.util.Map;
 public class PeliculasFragment extends Fragment implements PeliculaAdapter.NotificadorPeliculaCelda {
 
     private RecyclerView recyclerView;
-    //private List<Pelicula> peliculas;
-    private ArrayList<Pelicula> peliculas;
+    private ArrayList<Pelicula> listadoPeliculas;
+    private Boolean estadoGrilla;
     private NotificadorPelicula notificadorPelicula;
+    private NotificarEntreFragment notificadorEntreFragment;
     private PeliculaAdapter adapter;
-    public static final String CLAVE_TITULO_CATEGORIA = "titulo_categoria";
-    public static final String CLAVE_ACTIVAR_GRILLA = "estado_grilla";
-    public static final String CLAVE_PELICULAS = "clave_peliculas";
-    TextView textTituloCategoria;
-    Boolean estadoGrilla;
+    private TextView textTituloCategoria;
+    private CategoriaRecycleViewFragment categoriaACargar;
 
+    public static final String CLAVE_CATEGORIA = "categoria";
 
 
 
@@ -44,43 +44,36 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        estadoGrilla=false;
+
+
+
+
         View view = inflater.inflate(R.layout.fragment_peliculas, container, false);
-
+        //llamamos a la función que implementa la interfaz
+        onAttachToParentFragment(getParentFragment());
         recyclerView = view.findViewById(R.id.recycler_id);
+        textTituloCategoria = (TextView) view.findViewById(R.id.nombreCategoria);
+        categoriaACargar=recibirCategoriaACargar(view);
+        cargarContainer(categoriaACargar,textTituloCategoria);
+        listadoPeliculas = categoriaACargar.getCategoria().getPeliculas();
+        estadoGrilla = categoriaACargar.getGrillaActiva();
 
-        recibirParametro(view);
-        //  armarListadoPeliculas();
+
+
         //necesito pasarle al adapter el set de datos armado
 
-        adapter = new PeliculaAdapter(peliculas, this);
+        CargarRecycle();
 
-
-
+        //Listener
         textTituloCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //GUARDO EN UNA VARIABLE Drawable la imagen
                 //ENVIARLE EL MENSAJE AL ACTIVITY
-                notificadorPelicula.abrirGrilla(textTituloCategoria.getText().toString(),peliculas);
+                notificadorPelicula.abrirGrilla(categoriaACargar);
             }
         });
 
-
-
-
-        //el layout manager es la disposicion visual del recycler (lineal o grilla, con orientacion vertical u horizontal)
-        if(!estadoGrilla) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
-                    LinearLayoutManager.HORIZONTAL, false));
-        }else{
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        }
-        //si le puse match parent al alto y ancho del recycler, el setHasFixedSize mejora la performance
-        recyclerView.setHasFixedSize(true);
-        //le seteo el adapter creado al recycler view
-        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -88,52 +81,71 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        notificadorPelicula = (NotificadorPelicula) context;
+        try {
+            notificadorPelicula = (NotificadorPelicula) context;
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(
+                    context.toString() + " implementar NotificarPelicula");
+        }
 
     }
+    public void onAttachToParentFragment(Fragment fragment) {
+        try
+        {
+            notificadorEntreFragment = (NotificarEntreFragment) fragment;
 
-    private void recibirParametro(View view) {//Eugenio Recibo bundle
-        Bundle bundle = getArguments();
-        String tituloCategoria;
-        if (bundle != null) {
-            tituloCategoria = bundle.getString(CLAVE_TITULO_CATEGORIA);
-            estadoGrilla = bundle.getBoolean(CLAVE_ACTIVAR_GRILLA);
-            peliculas = (ArrayList) bundle.getSerializable(CLAVE_PELICULAS);
-            textTituloCategoria = (TextView) view.findViewById(R.id.nombreCategoria);
-            textTituloCategoria.setText(tituloCategoria);
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(
+                    fragment.toString() + " Implementar NotificarEntreFragments");
         }
     }
+    private void CargarRecycle() {
+        adapter = new PeliculaAdapter(listadoPeliculas, this);
+        //el layout manager es la disposicion visual del recycler (lineal o grilla, con orientacion vertical u horizontal)
+        if (!estadoGrilla) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
+                    LinearLayoutManager.HORIZONTAL, false));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        }
+        //si le puse match parent al alto y ancho del recycler, el setHasFixedSize mejora la performance
+        recyclerView.setHasFixedSize(true);
+        //le seteo el adapter creado al recycler view
+        recyclerView.setAdapter(adapter);
+    }
+    private void cargarContainer(CategoriaRecycleViewFragment categoriaACargar, TextView textTituloCategoria ){
 
+     String tituloCategoria = categoriaACargar.getCategoria().getNombreCategoria();
+     textTituloCategoria.setText(tituloCategoria);
+    }
+    private CategoriaRecycleViewFragment recibirCategoriaACargar(View view) {//Eugenio Recibo bundle
+        Bundle bundle = getArguments();
+        String tituloCategoria;
+        CategoriaRecycleViewFragment categoriaACargar = new CategoriaRecycleViewFragment();
+        if (bundle != null) {
+            categoriaACargar = (CategoriaRecycleViewFragment) bundle.getSerializable(CLAVE_CATEGORIA);
+        }
+        return categoriaACargar;
+    }
     public void actualizarPelicula(Pelicula pelicula){
-        if(peliculas.contains(pelicula)){
+        if(listadoPeliculas.contains(pelicula)){
             adapter.actualizarPelicula(pelicula);
         }
     }
+//SETERS AND GETTERS
 
-
-    /*private void armarListadoPeliculas() {
-        peliculas = new ArrayList<>();
-        peliculas.add(new Pelicula("Batman - El Caballero Oscuro",
-                "Acción, Drama, Crimen", R.drawable.caballero2));
-        peliculas.add(new Pelicula("El Padrino",
-                "Crimen, Drama", R.drawable.padrino));
-        peliculas.add(new Pelicula("Tiempos Violentos",
-                "Accion, Drama, Crimen", R.drawable.pulp));
-        peliculas.add(new Pelicula("El Profesional",
-                "Crimen, Drama", R.drawable.elprofesional));
-        peliculas.add(new Pelicula("El Señor de los Anillos",
-                "Aventura, Fantasia", R.drawable.lordof));
-        peliculas.add(new Pelicula("Star Wars",
-                "Ciencia Ficción", R.drawable.starwars));
-        peliculas.add(new Pelicula("Matrix",
-                "Ciencia Ficción", R.drawable.matrix));
-        peliculas.add(new Pelicula("Origen",
-                "Ciencia Ficción", R.drawable.origen));
-        peliculas.add(new Pelicula("Forrest Gump",
-                "Drama", R.drawable.forrest));
+    ArrayList<Pelicula> getListadoPeliculas(){
+        return listadoPeliculas;
     }
-*/
 
+
+
+
+    //Imlementación de la interfaz que se comunica con la celda
     @Override
     public void notificarPeliculaClickeado(Pelicula pelicula) {
         //esto se va a llamar cuando se clickee una celda en el adapter
@@ -142,21 +154,28 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
         notificadorPelicula.notificar(pelicula);
 
     }
-
     @Override
     public void solicitudDeActualizacionAdapters(Pelicula pelicula) {
+        adapter.notifyDataSetChanged();
         notificadorPelicula.solicituddeActualizarDatosFragmentsPelicula(pelicula);
 
     }
 
 
+
+
     //INTERFAZ QUE COMUNICA FRAGMENT CON ACTIVITY. EL ACTIVITY ES QUIEN IMPLEMENTA ESTA INTERFAZ
     public interface NotificadorPelicula {
         public void notificar(Pelicula pelicula);
-        public void abrirGrilla(String categoria, ArrayList<Pelicula> peliculas);
+        public void abrirGrilla(CategoriaRecycleViewFragment categoria);
         public void solicituddeActualizarDatosFragmentsPelicula(Pelicula pelicula);
 
-    }
 
+
+    }
+    // INTERFAZ QUE COMUNICA FRAGMENT HIJO (ESTE) CON EL PADRE (EL CONTENEDOR DE TODAS LAS CATEGORIAS)
+    public interface NotificarEntreFragment {
+
+    }
 
 }

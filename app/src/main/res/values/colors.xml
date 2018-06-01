@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#e91e63</color>
     <color name="colorAccent2">#ffeb3b</color>
+    <color name="amarillo">#ffeb3b</color>
     <color name="blanco">#ffffff</color>
 </resources>

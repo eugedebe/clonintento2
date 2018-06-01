@@ -20,7 +20,7 @@ public class BarraExplorar extends Fragment {
 
 
 private NotificadorBarraExplorar notificadorBarraExplorar;
-private ImageView iconoFavorito;
+private ImageView iconoFavorito,iconoHome,iconoBuscar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +31,7 @@ private ImageView iconoFavorito;
         View view=inflater.inflate(R.layout.fragment_barra_explorar, container, false);
 
         iconoFavorito = (ImageView) view.findViewById(R.id.boton_barra_favorito_id);
+        iconoHome = (ImageView) view.findViewById(R.id.boton_home);
 
         iconoFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,14 @@ private ImageView iconoFavorito;
             }
         });
 
+        iconoHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //GUARDO EN UNA VARIABLE Drawable la imagen
+                //ENVIARLE EL MENSAJE AL ACTIVITY
+                notificadorBarraExplorar.abrirHome();
+            }
+        });
 
 
         return view;
@@ -59,5 +68,7 @@ private ImageView iconoFavorito;
     public interface NotificadorBarraExplorar {
 
         public void abrirFavoritos();
+
+        void abrirHome();
     }
 }

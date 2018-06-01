@@ -8,10 +8,12 @@ public class DatosIniciales {
 
 private ArrayList<Pelicula> peliculas,listaFavoritos;
 private int clavesPeliculas=0;
+private ArrayList<String> listaCategorias;
 
     public DatosIniciales(){
         this.peliculas=armarListadoPeliculas();
         this.listaFavoritos = entregarListaFavoritos();
+        this.listaCategorias = entregarListaCategorías();
 
     }
 
@@ -27,6 +29,11 @@ private int clavesPeliculas=0;
     public ArrayList<Pelicula> getListafavoritos() {
         return listaFavoritos;
     }
+
+    public ArrayList<String> getListaCategorias() {
+        return listaCategorias;
+    }
+
 
 
     public void setListafavoritos(ArrayList<Pelicula> listaFavoritos) {
@@ -91,6 +98,16 @@ private int clavesPeliculas=0;
         return listaFavoritos;
     }
 
+    private ArrayList<String> entregarListaCategorías(){
+        ArrayList<String> listaCategorias = new ArrayList<>();
+        int i=0;
+        for(i=0;i<5;i++)
+        {
+            listaCategorias.add("Cat: "+i);
+        }
+        return listaCategorias;
+    }
+
     public void agregaraFavoritos(Pelicula pelicula){
         if(!this.listaFavoritos.contains(pelicula)){
             this.listaFavoritos.add(pelicula);
@@ -101,6 +118,8 @@ private int clavesPeliculas=0;
            this.listaFavoritos.remove(pelicula);
         }
     }
+
+
 }
 
 

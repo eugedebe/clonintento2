@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-public class GrillaCategoria extends AppCompatActivity implements PeliculasFragment.NotificadorPelicula{
+public class GrillaCategoria extends AppCompatActivity {
 
     public static final String CLAVE_CATEGORIA = "categoria";
     private PeliculasFragment peliculasFragment;
@@ -46,25 +46,17 @@ public class GrillaCategoria extends AppCompatActivity implements PeliculasFragm
         //////////////////////////////////////////////////////////////
     }
 
-    @Override
-    public void notificar(Pelicula pelicula) {
-        Intent intent = new Intent(this,DetallePeliculaActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(DetallePeliculaFragment.PELICULA_KEY, pelicula);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
 
 
-    @Override
+    //@Override
     public void abrirGrilla(String categoria, ArrayList<Pelicula> peliculas) {
 
     }
 
-    @Override
+    /*@Override
     public void solicituddeActualizarDatosFragmentsPelicula(Pelicula pelicula) {
         peliculasFragment.actualizarPelicula(pelicula);
     }
-
+*/
 
 }
