@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
 
     private BarraExplorar barraExplorar;
     private TodasCategoriasFragment todasCategoriasfragment;
-    private ArrayList<Pelicula> peliculasCategoría;
     public static final DatosIniciales datosIniciales = new DatosIniciales();
     private ArrayList<Categoria> listadoCategorias;
     private int idContenedorFragments;
@@ -117,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
     @Override
     public void abrirGrilla(CategoriaRecycleViewFragment categoria){
         //CARGO EL BUNDLE PARA Enviar al fragment
+
         CategoriaRecycleViewFragment categoriaAbrir = new CategoriaRecycleViewFragment(categoria.getCategoria(),true);
         PeliculasFragment peliculasFragment = new PeliculasFragment();
         Bundle unBundle = new Bundle();
@@ -151,22 +151,13 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
         Categoria categoria =  new Categoria (datosIniciales.getListafavoritos(),"Favoritos") ;
         CategoriaRecycleViewFragment categoriaRecycleFavoritos = new CategoriaRecycleViewFragment(categoria,true);
         abrirGrilla(categoriaRecycleFavoritos);
-        /*
-        Intent unIntent = new Intent(this, GrillaCategoria.class);
-        //CARGO EL BUNDLE PARA ENVIAR AL ACTIVITY
-        Bundle unBundle = new Bundle();
-        unBundle.putString(PeliculasFragment.CLAVE_CATEGORIA, "Favoritos");
-        unBundle.putBoolean(PeliculasFragment.CLAVE_ACTIVAR_GRILLA, true);
-        //ASOCIO EL BUNDLE AL INTENT
-        unIntent.putExtras(unBundle);
-        //COMIENZO LA ACTIVIDAD
-        startActivity(unIntent);
-*/
+
 
     }
 
     @Override
     public void abrirHome() {
+
         cargarCategoriaN(todasCategoriasfragment, listadoCategorias, idContenedorFragments);
     }
 

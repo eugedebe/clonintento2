@@ -69,6 +69,6 @@ private ImageView iconoFavorito,iconoHome,iconoBuscar;
 
         public void abrirFavoritos();
 
-        void abrirHome();
+        public void abrirHome();
     }
 }

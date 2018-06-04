@@ -28,10 +28,10 @@ import java.util.Map;
 public class PeliculasFragment extends Fragment implements PeliculaAdapter.NotificadorPeliculaCelda {
 
     private RecyclerView recyclerView;
-    private ArrayList<Pelicula> listadoPeliculas;
-    private Boolean estadoGrilla;
+ //   private ArrayList<Pelicula> listadoPeliculas;
+
     private NotificadorPelicula notificadorPelicula;
-    private NotificarEntreFragment notificadorEntreFragment;
+    //private NotificarEntreFragment notificadorEntreFragment;
     private PeliculaAdapter adapter;
     private TextView textTituloCategoria;
     private CategoriaRecycleViewFragment categoriaACargar;
@@ -39,29 +39,19 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
     public static final String CLAVE_CATEGORIA = "categoria";
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-
-
         View view = inflater.inflate(R.layout.fragment_peliculas, container, false);
         //llamamos a la función que implementa la interfaz
-        onAttachToParentFragment(getParentFragment());
+      //  onAttachToParentFragment(getParentFragment());
         recyclerView = view.findViewById(R.id.recycler_id);
         textTituloCategoria = (TextView) view.findViewById(R.id.nombreCategoria);
         categoriaACargar=recibirCategoriaACargar(view);
         cargarContainer(categoriaACargar,textTituloCategoria);
-        listadoPeliculas = categoriaACargar.getCategoria().getPeliculas();
-        estadoGrilla = categoriaACargar.getGrillaActiva();
-
-
 
         //necesito pasarle al adapter el set de datos armado
-
         CargarRecycle();
 
         //Listener
@@ -91,7 +81,9 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
         }
 
     }
-    public void onAttachToParentFragment(Fragment fragment) {
+
+
+   /* public void onAttachToParentFragment(Fragment fragment) {
         try
         {
             notificadorEntreFragment = (NotificarEntreFragment) fragment;
@@ -103,10 +95,12 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
                     fragment.toString() + " Implementar NotificarEntreFragments");
         }
     }
+    */
+
     private void CargarRecycle() {
-        adapter = new PeliculaAdapter(listadoPeliculas, this);
+        adapter = new PeliculaAdapter(categoriaACargar.getCategoria().getPeliculas(), this);
         //el layout manager es la disposicion visual del recycler (lineal o grilla, con orientacion vertical u horizontal)
-        if (!estadoGrilla) {
+        if (!categoriaACargar.getGrillaActiva()) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                     LinearLayoutManager.HORIZONTAL, false));
         } else {
@@ -117,11 +111,15 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
         //le seteo el adapter creado al recycler view
         recyclerView.setAdapter(adapter);
     }
+
+
     private void cargarContainer(CategoriaRecycleViewFragment categoriaACargar, TextView textTituloCategoria ){
 
      String tituloCategoria = categoriaACargar.getCategoria().getNombreCategoria();
      textTituloCategoria.setText(tituloCategoria);
     }
+
+
     private CategoriaRecycleViewFragment recibirCategoriaACargar(View view) {//Eugenio Recibo bundle
         Bundle bundle = getArguments();
         String tituloCategoria;
@@ -131,18 +129,18 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
         }
         return categoriaACargar;
     }
+
+
     public void actualizarPelicula(Pelicula pelicula){
-        if(listadoPeliculas.contains(pelicula)){
+        if(categoriaACargar.getCategoria().getPeliculas().contains(pelicula)){
             adapter.actualizarPelicula(pelicula);
         }
     }
 //SETERS AND GETTERS
 
     ArrayList<Pelicula> getListadoPeliculas(){
-        return listadoPeliculas;
+        return categoriaACargar.getCategoria().getPeliculas();
     }
-
-
 
 
     //Imlementación de la interfaz que se comunica con la celda

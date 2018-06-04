@@ -20,14 +20,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TodasCategoriasFragment extends Fragment implements PeliculasFragment.NotificarEntreFragment {
+public class TodasCategoriasFragment extends Fragment  {
+//implements PeliculasFragment.NotificarEntreFragment
 
-    private Boolean estadoGrilla;
-    private Categoria categoria;
+
     private ArrayList<PeliculasFragment> listaPeliculasFragment;
-    private ArrayList<Pelicula> listaPeliculas;
     private ArrayList<Categoria> listadoCategorias;
-    private String categoriaACargar;
     public static final String CLAVE_TODAS_CATEGORIAS = "nombreCatpeliculas";
 
     @Override
@@ -36,15 +34,10 @@ public class TodasCategoriasFragment extends Fragment implements PeliculasFragme
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.todascategoriasfragment, container, false);
         //variables
-        categoriaACargar=new String();
+
         listaPeliculasFragment= new ArrayList<>();
-        estadoGrilla=false;
-        listaPeliculas = new ArrayList<>();
         listadoCategorias = recibirCategorias(); //carga el listado de peliculas ordenados según categorias
         CategoriaRecycleViewFragment categoriaAEnviar;
-
-
-
         int idContainer;
         for(Categoria categoriaActual:listadoCategorias) {
             categoriaAEnviar = new CategoriaRecycleViewFragment(categoriaActual,false);
@@ -63,7 +56,7 @@ public class TodasCategoriasFragment extends Fragment implements PeliculasFragme
         listaPeliculasFragment.add(peliculasFragment);
         Bundle unBundle = new Bundle();
         unBundle.putSerializable(PeliculasFragment.CLAVE_CATEGORIA, categoria);
-        listaPeliculasFragment.get(listaPeliculasFragment.size()-1).setArguments(unBundle);
+        peliculasFragment.setArguments(unBundle);
         ////////////////////////////////////////////////////////////////////////
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -75,7 +68,8 @@ public class TodasCategoriasFragment extends Fragment implements PeliculasFragme
     //EUGENIO: RECIBO CATEGORIA
 
     private ArrayList<Categoria> recibirCategorias() {//Eugenio Recibo bundle
-        //RECIBIR EL BUNDLE
+
+
     ArrayList<Categoria> listadoCategorias = new ArrayList<>();
         Bundle bundle = getArguments();
 
