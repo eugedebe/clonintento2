@@ -8,22 +8,16 @@
     android:orientation="vertical"
     tools:context="com.example.recyclerviewbase.MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="90"
-        android:id="@+id/scroll_view"
-        android:background="@color/colorPrimaryDark">
-        <LinearLayout
+
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/colorPrimaryDark"
+            android:layout_height="0dp"
+            android:layout_weight="90"
             android:id="@+id/contenedor_Fragments">
+        </FrameLayout>
 
 
-        </LinearLayout>
-    </ScrollView>
 
     <FrameLayout
         android:id="@+id/barra_favorito_id"

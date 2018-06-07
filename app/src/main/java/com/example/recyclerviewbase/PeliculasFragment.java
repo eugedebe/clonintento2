@@ -145,11 +145,11 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
 
     //Imlementación de la interfaz que se comunica con la celda
     @Override
-    public void notificarPeliculaClickeado(Pelicula pelicula) {
+    public void notificarPeliculaClickeado(int posicionPeliculaClickpelicula) {
         //esto se va a llamar cuando se clickee una celda en el adapter
         //Esto hace de pasa mano, y tiene que notificarle al activity el pelicula que llegó.
         //aca estoy en el metodo que me obligo a implementar LA INTERFAZ DEL ADAPTER!
-        notificadorPelicula.notificar(pelicula);
+        notificadorPelicula.notificar(this.categoriaACargar.getCategoria(),posicionPeliculaClickpelicula);
 
     }
     @Override
@@ -160,11 +160,9 @@ public class PeliculasFragment extends Fragment implements PeliculaAdapter.Notif
     }
 
 
-
-
     //INTERFAZ QUE COMUNICA FRAGMENT CON ACTIVITY. EL ACTIVITY ES QUIEN IMPLEMENTA ESTA INTERFAZ
     public interface NotificadorPelicula {
-        public void notificar(Pelicula pelicula);
+        public void notificar(Categoria categoria, int posicion);
         public void abrirGrilla(CategoriaRecycleViewFragment categoria);
         public void solicituddeActualizarDatosFragmentsPelicula(Pelicula pelicula);
 

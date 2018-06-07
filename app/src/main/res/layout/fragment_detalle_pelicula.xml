@@ -1,4 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/relative"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,21 +8,35 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.example.recyclerviewbase.DetallePeliculaFragment">
 
+
+    <TextView
+        android:id="@+id/titulo_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/blanco"
+        tools:text="Titulo Categoria" />
+
     <ImageView
         android:id="@+id/imagen_pelicula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="15dp"
         tools:src="@drawable/santa" />
 
     <TextView
         android:id="@+id/titulo_pelicula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imagen_pelicula"
         android:layout_centerHorizontal="true"
         android:textSize="24sp"
+        android:layout_gravity="center"
         android:textStyle="bold"
         android:textColor="@color/blanco"
         tools:text="Titulo" />
@@ -28,11 +44,12 @@
     <TextView
         android:id="@+id/descripcion_pelicula"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titulo_pelicula"
+
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textColor="@color/blanco"
         tools:text="Bla bla bla bla" />
 
-</RelativeLayout>
+</LinearLayout>
