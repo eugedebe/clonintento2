@@ -33,10 +33,8 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
         todasCategoriasfragment = new TodasCategoriasFragment();
         listadoCategorias = new ArrayList<>();
         idContenedorFragments = R.id.contenedor_Fragments;
-
         //Simulo recibir categoría
         //cargo categoría 1
-
         listadoCategorias = recibirListadoPeliculasXCategoria();
         cargarCategoriaN(todasCategoriasfragment, listadoCategorias, idContenedorFragments);
         //CARGO LA BARRA EXPLORAR
@@ -58,21 +56,17 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
     }
 
     private void cargarBarra() {
-
         barraExplorar = new BarraExplorar();
         int idContanerBarra = R.id.barra_favorito_id;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(idContanerBarra, barraExplorar);
         fragmentTransaction.commit();
-
     }
 
 
     private void cargarCategoriaN(TodasCategoriasFragment todasCategoriasfragment,
                                   ArrayList<Categoria> listadoCategorias,int idContenedor) {
-
-
         Bundle unBundle = new Bundle();
         unBundle.putSerializable(todasCategoriasfragment.CLAVE_TODAS_CATEGORIAS, (Serializable)  listadoCategorias);
         todasCategoriasfragment.setArguments(unBundle);
@@ -84,39 +78,24 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
         fragmentTransaction.commit();
     }
 
-
-
-
-
-
-
-    @Override
-    public void notificar(Pelicula pelicula) {
-        //SI QUEREMOS HACERLO DESDE UNA NUEVA ACTIVITY DEBERÍA QUEDAR ESTA
-        /*Intent intent = new Intent(this,DetallePeliculaActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(DetallePeliculaFragment.PELICULA_KEY, pelicula);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        */
-        DetallePeliculaFragment detallePeliculaFragment = new DetallePeliculaFragment();
+        @Override
+    public void notificar(Categoria categoria, int posicion) {
+        UnaCaegoriaViewPageFragment unaCaegoriaViewPageFragment = new UnaCaegoriaViewPageFragment();
         Bundle unBundle = new Bundle();
-        unBundle.putSerializable(DetallePeliculaFragment.PELICULA_KEY,pelicula);
-        detallePeliculaFragment.setArguments(unBundle);
+        unBundle.putInt(UnaCaegoriaViewPageFragment.CLAVE_POSICION,posicion);
+        unBundle.putSerializable(UnaCaegoriaViewPageFragment.CLAVE_CATEGORIAS, categoria);
+        unaCaegoriaViewPageFragment.setArguments(unBundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(idContenedorFragments, detallePeliculaFragment);
-        fragmentTransaction.addToBackStack(detallePeliculaFragment.getClass().getName());
+        fragmentTransaction.add(idContenedorFragments, unaCaegoriaViewPageFragment);
+        fragmentTransaction.addToBackStack(unaCaegoriaViewPageFragment.getClass().getName());
         fragmentTransaction.commit();
-
-
-
     }
+
 
     @Override
     public void abrirGrilla(CategoriaRecycleViewFragment categoria){
         //CARGO EL BUNDLE PARA Enviar al fragment
-
         CategoriaRecycleViewFragment categoriaAbrir = new CategoriaRecycleViewFragment(categoria.getCategoria(),true);
         PeliculasFragment peliculasFragment = new PeliculasFragment();
         Bundle unBundle = new Bundle();
@@ -141,27 +120,16 @@ public class MainActivity extends AppCompatActivity implements PeliculasFragment
         }
     }
 
-
-
-
-
     @Override
     public void abrirFavoritos() {
 
         Categoria categoria =  new Categoria (datosIniciales.getListafavoritos(),"Favoritos") ;
         CategoriaRecycleViewFragment categoriaRecycleFavoritos = new CategoriaRecycleViewFragment(categoria,true);
         abrirGrilla(categoriaRecycleFavoritos);
-
-
     }
 
     @Override
     public void abrirHome() {
-
         cargarCategoriaN(todasCategoriasfragment, listadoCategorias, idContenedorFragments);
     }
-
-
 }
-
-

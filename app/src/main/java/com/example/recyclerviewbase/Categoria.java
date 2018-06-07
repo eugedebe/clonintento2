@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Categoria {
+public class Categoria implements  Serializable {
 
-    private String nombreCategoria;
-    private ArrayList<Pelicula> listadoPeliculas;
+    protected String nombreCategoria;
+    protected ArrayList<Pelicula> listadoPeliculas;
 
     public Categoria() {
         this.nombreCategoria = new String();

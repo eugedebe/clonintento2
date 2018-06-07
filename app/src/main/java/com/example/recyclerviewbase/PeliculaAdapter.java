@@ -90,16 +90,18 @@ public class PeliculaAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     int posicionPeliculaClickeado = getAdapterPosition();
-                    Pelicula pelicula = peliculas.get(posicionPeliculaClickeado);
-                    notificadorPeliculaCelda.notificarPeliculaClickeado(pelicula);
-
+                    //Pelicula pelicula = peliculas.get(posicionPeliculaClickeado);
+                    notificadorPeliculaCelda.notificarPeliculaClickeado(posicionPeliculaClickeado);
                 }
                 
             });
+
+
             imagenestadoFavorito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Pelicula pelicula = peliculas.get(getAdapterPosition());
+
                     pelicula.cambiarEstadoFav();
 
                     // TODO: 27/5/2018 crear la función setearImagenFavorito que haga este trabajo para no repetir codigo
@@ -140,7 +142,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter {
 
     //INTERFAZ QUE COMUNICA ADAPTER CON FRAGMENT. EL FRAGMENT ES QUIEN IMPLEMENTA ESTA INTERFAZ
     public interface NotificadorPeliculaCelda {
-        public void notificarPeliculaClickeado(Pelicula pelicula);
+        public void notificarPeliculaClickeado(int posicionClickPelicula);
         public void solicitudDeActualizacionAdapters(Pelicula pelicula);
     }
 }
